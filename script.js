@@ -142,22 +142,21 @@ const lightboxPrev = lightbox.querySelector(".lightbox-prev");
 const lightboxNext = lightbox.querySelector(".lightbox-next");
 const lightboxCounter = lightbox.querySelector(".lightbox-counter");
 const lightboxTitle = lightbox.querySelector(".lightbox-title");
-const lightboxDescription = lightbox.querySelector(".lightbox-description");
 const lightboxCards = [...document.querySelectorAll("[data-lightbox], [data-lightbox-video]")];
 let lightboxIndex = 0;
 
 const lightboxDetails = [
-  ["藍髮夏日造型", "藍髮貓耳角色的清爽夏日造型展示。"],
-  ["黑色皮革造型", "以黑色皮革服飾呈現俐落氣質的角色造型。"],
-  ["星空狐耳造型", "以星空氛圍呈現的狐耳角色造型。"],
-  ["睡眠動態展示", "白髮狐耳角色的睡眠動態作品。"],
-  ["紅黑正裝造型", "紅黑配色的龍族正式服裝造型。"],
-  ["白色睡衣造型", "白髮狐耳角色的柔和睡衣造型。"],
-  ["柔和黑髮妝面", "黑髮角色的柔和妝面與整體造型。"],
-  ["海灘泳裝造型", "海灘場景中的夏日泳裝角色造型。"],
-  ["親吻動態展示", "角色互動的親吻動態作品。"],
-  ["黑白短髮造型", "以黑白色調呈現的短髮角色造型。"],
-  ["紅黑異手造型", "以紅黑異手為重點的角色造型展示。"],
+  "しお Sio",
+  "海咲-Misaki-",
+  "右近弐式 Ukon second type",
+  "右近弐式 Ukon second type",
+  "ドラゴニュート・ヴラウ Vlau",
+  "右近弐式 Ukon second type",
+  "しなの Shinano",
+  "しなの Shinano",
+  "右近弐式 Ukon second type",
+  "右近弐式 Ukon second type",
+  "右近弐式 Ukon second type",
 ];
 
 function showLightboxItem(index) {
@@ -182,10 +181,8 @@ function showLightboxItem(index) {
   }
 
   lightboxStage.replaceChildren(media);
-  const [title, description] = lightboxDetails[lightboxIndex];
   lightboxCounter.textContent = `${lightboxIndex + 1} / ${lightboxCards.length}`;
-  lightboxTitle.textContent = title;
-  lightboxDescription.textContent = description;
+  lightboxTitle.textContent = lightboxDetails[lightboxIndex];
 }
 
 function moveLightbox(direction) {
