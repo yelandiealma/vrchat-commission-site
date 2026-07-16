@@ -1848,8 +1848,10 @@ h3,
 
 @media (max-width: 720px) {
   .contact {
-    width: auto;
-    margin-inline: 16px;
+    width: 100%;
+    margin-inline: 0;
+    padding-right: 16px;
+    padding-left: 16px;
   }
 
   .contact-card {
