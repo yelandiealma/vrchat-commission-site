@@ -1847,6 +1847,11 @@ h3,
 }
 
 @media (max-width: 720px) {
+  .contact {
+    width: min(calc(100% - 32px), var(--max));
+    margin-inline: auto;
+  }
+
   .contact-card {
     border-radius: 20px;
   }
