@@ -1481,14 +1481,30 @@ button {
   }
 
   .hero-visual {
-    width: calc(100% - 22px);
+    width: calc(100% - 32px);
     justify-self: center;
   }
 
   .hero-signature {
-    right: -14px;
+    right: 0;
     bottom: 14px;
     min-width: 180px;
+  }
+
+  .orbit-one {
+    inset: -20px 0 30px 12px;
+  }
+
+  .orbit-two {
+    inset: 30px 12px -20px 0;
+  }
+
+  .spark-one {
+    right: 0;
+  }
+
+  .spark-two {
+    left: 0;
   }
 
   .section-heading {
