@@ -18,21 +18,31 @@ function applyTheme(theme) {
 
 applyTheme(document.documentElement.dataset.theme || "light");
 themeToggle.addEventListener("click", () => {
-  applyTheme(document.documentElement.dataset.theme === "dark" ? "light" : "dark");
+  const nextTheme = document.documentElement.dataset.theme === "dark" ? "light" : "dark";
+  applyTheme(nextTheme);
+  try {
+    localStorage.setItem("alma-theme", nextTheme);
+  } catch {}
 });
-systemTheme.addEventListener("change", (event) => applyTheme(event.matches ? "dark" : "light"));
+systemTheme.addEventListener("change", (event) => {
+  try {
+    if (localStorage.getItem("alma-theme")) return;
+  } catch {}
+  applyTheme(event.matches ? "dark" : "light");
+});
 
 const rows = [...document.querySelectorAll(".price-row")];
 const totalOutput = document.querySelector("#estimate-total");
 const countOutput = document.querySelector("#estimate-count");
 const resetButton = document.querySelector("#estimate-reset");
 const copyEstimateButton = document.querySelector("#estimate-copy");
-let savedEstimate = [];
+let savedEstimate = {};
 
 try {
-  savedEstimate = JSON.parse(localStorage.getItem("alma-estimate") || "[]");
+  const parsedEstimate = JSON.parse(localStorage.getItem("alma-estimate") || "{}");
+  savedEstimate = parsedEstimate && !Array.isArray(parsedEstimate) ? parsedEstimate : {};
 } catch {
-  savedEstimate = [];
+  savedEstimate = {};
 }
 
 function setQuantity(row, nextQuantity) {
@@ -64,11 +74,16 @@ function updateEstimate() {
   countOutput.textContent = selectedKinds
     ? `已選 ${selectedKinds} 個品項，共 ${totalQuantity} 件`
     : "尚未選擇項目";
-  localStorage.setItem("alma-estimate", JSON.stringify(rows.map((row) => Number(row.dataset.quantity || 0))));
+  const estimateByName = Object.fromEntries(
+    rows.map((row) => [row.dataset.name, Number(row.dataset.quantity || 0)]),
+  );
+  try {
+    localStorage.setItem("alma-estimate", JSON.stringify(estimateByName));
+  } catch {}
 }
 
-rows.forEach((row, index) => {
-  setQuantity(row, Number(savedEstimate[index] || 0));
+rows.forEach((row) => {
+  setQuantity(row, Number(savedEstimate[row.dataset.name] || 0));
   const checkbox = row.querySelector('input[type="checkbox"]');
   const stepButtons = row.querySelectorAll("[data-step]");
 
@@ -198,10 +213,6 @@ function closeLightbox() {
 }
 
 lightboxCards.forEach((card, index) => {
-  if (card.dataset.lightboxVideo) {
-    const filename = card.dataset.lightboxVideo.split("/").pop();
-    card.setAttribute("aria-label", `開啟影片作品：${filename}`);
-  }
   card.addEventListener("click", () => {
     showLightboxItem(index);
     lightbox.showModal();
@@ -230,9 +241,14 @@ lightbox.addEventListener("cancel", (event) => {
   closeLightbox();
 });
 
+const masonryViewport = document.querySelector(".masonry-viewport");
+const reduceMotion = matchMedia("(prefers-reduced-motion: reduce)");
 const motionCards = document.querySelectorAll(".work-card video");
-if ("IntersectionObserver" in window && !matchMedia("(prefers-reduced-motion: reduce)").matches) {
-  const observer = new IntersectionObserver(
+
+if (reduceMotion.matches) {
+  motionCards.forEach((video) => video.pause());
+} else if ("IntersectionObserver" in window) {
+  const motionObserver = new IntersectionObserver(
     (entries) => {
       entries.forEach((entry) => {
         if (entry.isIntersecting) entry.target.play().catch(() => {});
@@ -241,11 +257,9 @@ if ("IntersectionObserver" in window && !matchMedia("(prefers-reduced-motion: re
     },
     { threshold: 0.55 },
   );
-  motionCards.forEach((video) => observer.observe(video));
+  motionCards.forEach((video) => motionObserver.observe(video));
 }
 
-const masonryViewport = document.querySelector(".masonry-viewport");
-const reduceMotion = matchMedia("(prefers-reduced-motion: reduce)");
 const galleryLeft = document.querySelector(".gallery-arrow-left");
 const galleryRight = document.querySelector(".gallery-arrow-right");
 let galleryDragging = false;

@@ -13,15 +13,19 @@
     <link rel="icon" type="image/png" href="assets/alma-icon.png" />
     <script>
       (() => {
+        let savedTheme = null;
+        try {
+          savedTheme = localStorage.getItem("alma-theme");
+        } catch {}
         const dark = matchMedia("(prefers-color-scheme: dark)").matches;
-        document.documentElement.dataset.theme = dark ? "dark" : "light";
+        document.documentElement.dataset.theme = savedTheme || (dark ? "dark" : "light");
       })();
     </script>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;600;700;800&amp;family=Noto+Serif+TC:wght@600;700;800&amp;display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="styles.css?v=20260718-1" />
-    <script src="script.js?v=20260717-1" defer></script>
+    <link rel="stylesheet" href="styles.css?v=20260718-5" />
+    <script src="script.js?v=20260718-3" defer></script>
   </head>
   <body>
     <a class="skip-link" href="#main">跳到主要內容</a>
@@ -30,7 +34,7 @@
       <div class="nav-shell">
         <a class="brand" href="#top" aria-label="回到首頁">
           <span class="brand-mark" aria-hidden="true">
-            <img src="assets/alma-icon.png" alt="" />
+            <img src="assets/alma-icon.png" alt="" width="1024" height="1024" />
           </span>
           <span>夜嵐蝶 <b>Alma</b></span>
         </a>
@@ -61,7 +65,7 @@
           <div class="hero-orbit orbit-one"></div>
           <div class="hero-orbit orbit-two"></div>
           <div class="hero-image-wrap">
-            <img src="assets/hero-sleep.webp" alt="白髮狐耳 VRChat 角色蜷坐入睡的改造作品" />
+            <img src="assets/hero-sleep.webp" alt="白髮狐耳 VRChat 角色蜷坐入睡的改造作品" width="1708" height="1690" decoding="async" fetchpriority="high" />
           </div>
           <div class="hero-signature">
             <span>Portfolio &amp; Commission</span>
@@ -79,7 +83,7 @@
             <button class="gallery-arrow gallery-arrow-left" type="button" aria-label="向左瀏覽作品">←</button>
             <div class="masonry-viewport masonry-natural masonry-natural--compact" tabindex="0" aria-label="作品畫廊，可按住拖曳或使用箭頭瀏覽">
             <div class="portfolio-flow flow-equal flow-equal--12">
-                          <button class="work-card" type="button" data-lightbox="assets/look-blue.webp"><img src="assets/look-blue.webp" alt="藍髮貓耳夏日角色" /></button><button class="work-card" type="button" data-lightbox="assets/black-leather.webp"><img src="assets/black-leather.webp" alt="黑色皮革造型角色" /></button><button class="work-card" type="button" data-lightbox="assets/moon-kitsune.webp"><img src="assets/moon-kitsune.webp" alt="星空狐耳角色" /></button><button class="work-card work-video" type="button" data-lightbox-video="assets/sleep-motion.mp4"><video muted loop autoplay playsinline preload="metadata" poster="assets/hero-sleep.webp"><source src="assets/sleep-motion.mp4" type="video/mp4" /></video></button><button class="work-card" type="button" data-lightbox="assets/dragon-formal.webp"><img src="assets/dragon-formal.webp" alt="紅黑正裝龍族角色" /></button><button class="work-card" type="button" data-lightbox="assets/sleep-white.webp"><img src="assets/sleep-white.webp" alt="白色睡衣狐耳角色" /></button><button class="work-card" type="button" data-lightbox="assets/look-soft-black.webp"><img src="assets/look-soft-black.webp" alt="黑髮柔和妝面角色" /></button><button class="work-card" type="button" data-lightbox="assets/shinano-swim.webp"><img src="assets/shinano-swim.webp" alt="海灘泳裝角色" /></button><button class="work-card work-video" type="button" data-lightbox-video="assets/kiss-motion.mp4"><video muted loop autoplay playsinline preload="metadata" poster="assets/kiss-poster.webp"><source src="assets/kiss-motion.mp4" type="video/mp4" /></video></button><button class="work-card" type="button" data-lightbox="assets/monochrome.webp"><img src="assets/monochrome.webp" alt="黑白短髮角色" /></button><button class="work-card" type="button" data-lightbox="assets/ukon-redhand.webp"><img src="assets/ukon-redhand.webp" alt="紅黑異手角色" /></button>
+                          <button class="work-card" type="button" data-lightbox="assets/look-blue.webp"><img src="assets/look-blue.webp" alt="藍髮貓耳夏日角色" width="1152" height="2048" loading="lazy" decoding="async" /></button><button class="work-card" type="button" data-lightbox="assets/black-leather.webp"><img src="assets/black-leather.webp" alt="黑色皮革造型角色" width="1800" height="1350" loading="lazy" decoding="async" /></button><button class="work-card" type="button" data-lightbox="assets/moon-kitsune.webp"><img src="assets/moon-kitsune.webp" alt="星空狐耳角色" width="1800" height="1012" loading="lazy" decoding="async" /></button><button class="work-card work-video" type="button" data-lightbox-video="assets/sleep-motion.mp4" aria-label="開啟影片作品：白髮狐耳角色入睡動態"><video muted loop autoplay playsinline preload="metadata" poster="assets/hero-sleep.webp" aria-hidden="true"><source src="assets/sleep-motion.mp4" type="video/mp4" /></video></button><button class="work-card" type="button" data-lightbox="assets/dragon-formal.webp"><img src="assets/dragon-formal.webp" alt="紅黑正裝龍族角色" width="1800" height="1348" loading="lazy" decoding="async" /></button><button class="work-card" type="button" data-lightbox="assets/sleep-white.webp"><img src="assets/sleep-white.webp" alt="白色睡衣狐耳角色" width="1693" height="1694" loading="lazy" decoding="async" /></button><button class="work-card" type="button" data-lightbox="assets/look-soft-black.webp"><img src="assets/look-soft-black.webp" alt="黑髮柔和妝面角色" width="1800" height="1012" loading="lazy" decoding="async" /></button><button class="work-card" type="button" data-lightbox="assets/shinano-swim.webp"><img src="assets/shinano-swim.webp" alt="海灘泳裝角色" width="1200" height="900" loading="lazy" decoding="async" /></button><button class="work-card work-video" type="button" data-lightbox-video="assets/kiss-motion.mp4" aria-label="開啟影片作品：角色親吻動態"><video muted loop autoplay playsinline preload="metadata" poster="assets/kiss-poster.webp" aria-hidden="true"><source src="assets/kiss-motion.mp4" type="video/mp4" /></video></button><button class="work-card" type="button" data-lightbox="assets/monochrome.webp"><img src="assets/monochrome.webp" alt="黑白短髮角色" width="1200" height="900" loading="lazy" decoding="async" /></button><button class="work-card" type="button" data-lightbox="assets/ukon-redhand.webp"><img src="assets/ukon-redhand.webp" alt="紅黑異手角色" width="946" height="1668" loading="lazy" decoding="async" /></button>
                         </div>
             </div>
             <button class="gallery-arrow gallery-arrow-right" type="button" aria-label="向右瀏覽作品">→</button>
@@ -172,7 +176,6 @@
 
       <section class="faq section" id="faq" aria-labelledby="faq-title">
         <div class="faq-heading">
-          <p>委託前，先確認這些事</p>
           <h2 id="faq-title">常見問題</h2>
         </div>
         <div class="faq-list">

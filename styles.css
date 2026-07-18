@@ -1,6 +1,7 @@
 :root {
   --ink: #201a2e;
   --muted: #756f80;
+  --text-subtle: #625b6c;
   --purple: #7455d9;
   --purple-deep: #4b347f;
   --lilac: #cfc2f5;
@@ -8,6 +9,12 @@
   --line: #e5def4;
   --paper: #ffffff;
   --soft: #faf8fe;
+  --header-bg: rgba(255, 255, 255, 0.88);
+  --nav-text: #5f5968;
+  --row-line: #eee9f7;
+  --media-surface: #ede9f5;
+  --calendar-surface: #ffffff;
+  --estimate-surface: var(--lilac-soft);
   --max: 1180px;
   --radius: 28px;
   --shadow: 0 28px 80px rgba(73, 49, 115, 0.13);
@@ -17,6 +24,7 @@
 :root[data-theme="dark"] {
   --ink: #f2edf9;
   --muted: #b8afc5;
+  --text-subtle: #b8afc5;
   --purple: #a98bf5;
   --purple-deep: #c8b5ff;
   --lilac: #7157ad;
@@ -24,6 +32,12 @@
   --line: #443a54;
   --paper: #17131e;
   --soft: #211b2b;
+  --header-bg: rgba(23, 19, 30, 0.9);
+  --nav-text: #c8bfd3;
+  --row-line: #3a3148;
+  --media-surface: #292235;
+  --calendar-surface: #17131e;
+  --estimate-surface: #282033;
   --shadow: 0 28px 80px rgba(0, 0, 0, 0.34);
   color-scheme: dark;
 }
@@ -43,7 +57,7 @@ body {
   margin: 0;
   color: var(--ink);
   background: var(--paper);
-  font-family: Inter, "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", sans-serif;
+  font-family: "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", sans-serif;
   line-height: 1.65;
   -webkit-font-smoothing: antialiased;
 }
@@ -94,7 +108,7 @@ button {
   z-index: 50;
   top: 0;
   border-bottom: 1px solid rgba(229, 222, 244, 0.7);
-  background: rgba(255, 255, 255, 0.88);
+  background: var(--header-bg);
   backdrop-filter: blur(18px);
 }
 
@@ -139,7 +153,7 @@ button {
 
 :root[data-theme="dark"] .site-header {
   border-bottom-color: rgba(68, 58, 84, 0.8);
-  background: rgba(23, 19, 30, 0.9);
+  background: var(--header-bg);
 }
 
 :root[data-theme="dark"] .brand-mark,
@@ -153,7 +167,7 @@ button {
 }
 
 :root[data-theme="dark"] .main-nav {
-  color: #c8bfD3;
+  color: var(--nav-text);
 }
 
 :root[data-theme="dark"] .button {
@@ -177,27 +191,17 @@ button {
 }
 
 :root[data-theme="dark"] .work-card {
-  background: #292235;
+  background: var(--media-surface);
   box-shadow: 0 0 0 1px rgba(200, 181, 255, 0.12);
 }
 
 :root[data-theme="dark"] .price-row {
-  border-top-color: #3a3148;
+  border-top-color: var(--row-line);
 }
 
 :root[data-theme="dark"] .price-row label small,
 :root[data-theme="dark"] .estimate-panel > small {
-  color: #aaa0b8;
-}
-
-:root[data-theme="dark"] .estimate-panel {
-  border-color: var(--line);
-  background: linear-gradient(155deg, #241d30 0%, #302544 100%);
-  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.24);
-}
-
-:root[data-theme="dark"] .contact-card {
-  background: radial-gradient(circle at 18% 10%, rgba(169, 139, 245, 0.2), transparent 34%), linear-gradient(145deg, #100d16, #241832 60%, #3a2854);
+  color: var(--text-subtle);
 }
 
 :root[data-theme="dark"] .site-footer {
@@ -252,7 +256,7 @@ button {
   align-items: center;
   gap: 34px;
   margin-left: auto;
-  color: #5f5968;
+  color: var(--nav-text);
   font-size: 15px;
 }
 
@@ -334,27 +338,8 @@ button {
   gap: clamp(54px, 8vw, 110px);
 }
 
-.eyebrow {
-  margin: 0 0 22px;
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  color: var(--purple);
-  font-size: 14px;
-  font-weight: 800;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-}
-
-.eyebrow span {
-  width: 28px;
-  height: 1px;
-  background: currentColor;
-}
-
 .hero h1,
-.section-heading h2,
-.contact h2 {
+.section-heading h2 {
   margin: 0;
   font-family: "Noto Serif TC", "Songti TC", "PMingLiU", serif;
   font-weight: 600;
@@ -629,10 +614,6 @@ button {
   gap: 40px;
 }
 
-.section-heading .eyebrow {
-  margin-bottom: 12px;
-}
-
 .section-heading h2 {
   font-size: clamp(38px, 5vw, 58px);
 }
@@ -763,7 +744,7 @@ button {
 
 .price-group summary small {
   margin-right: 10px;
-  color: var(--purple);
+  color: var(--text-subtle);
   font-size: 14px;
   letter-spacing: 0.08em;
 }
@@ -777,8 +758,8 @@ button {
 
 .price-group summary .price-group-heading small {
   margin-right: 0;
-  color: var(--muted);
-  font-size: 13px;
+  color: var(--text-subtle);
+  font-size: 14px;
   font-weight: 400;
   letter-spacing: 0;
 }
@@ -804,10 +785,10 @@ button {
   min-height: 64px;
   padding: 8px 0;
   display: grid;
-  grid-template-columns: minmax(0, 1fr) 90px 104px;
+  grid-template-columns: minmax(0, 1fr) 90px 120px;
   align-items: center;
   gap: 14px;
-  border-top: 1px solid #eee9f7;
+  border-top: 1px solid var(--row-line);
 }
 
 .price-row label {
@@ -834,7 +815,7 @@ button {
 }
 
 .price-row label small {
-  color: #8c8596;
+  color: var(--text-subtle);
   font-size: 14px;
   font-weight: 400;
   line-height: 1.5;
@@ -848,9 +829,9 @@ button {
 }
 
 .stepper {
-  height: 34px;
+  height: 44px;
   display: grid;
-  grid-template-columns: 32px 36px 32px;
+  grid-template-columns: 44px 32px 44px;
   overflow: hidden;
   border: 1px solid var(--line);
   border-radius: 999px;
@@ -909,7 +890,7 @@ button {
 .estimate-panel > strong {
   margin-top: 3px;
   color: var(--purple-deep);
-  font-family: Georgia, "Noto Serif TC", serif;
+  font-family: "Noto Serif TC", serif;
   font-size: clamp(34px, 4vw, 44px);
   letter-spacing: -0.04em;
 }
@@ -917,7 +898,7 @@ button {
 .estimate-panel > span {
   min-height: 26px;
   margin-top: 4px;
-  color: var(--muted);
+  color: var(--text-subtle);
   font-size: 14px;
 }
 
@@ -955,116 +936,9 @@ button {
 
 .estimate-panel > small {
   display: block;
-  color: #81788e;
+  color: var(--text-subtle);
   font-size: 14px;
   line-height: 1.7;
-}
-
-.contact {
-  padding: 78px 0 100px;
-}
-
-.contact-card {
-  position: relative;
-  overflow: hidden;
-  padding: clamp(34px, 6vw, 74px);
-  display: grid;
-  grid-template-columns: minmax(0, 1.1fr) minmax(300px, 0.78fr);
-  gap: clamp(40px, 8vw, 90px);
-  border-radius: 36px;
-  background:
-    radial-gradient(circle at 18% 10%, rgba(194, 173, 255, 0.22), transparent 34%),
-    linear-gradient(145deg, #21182f, #392654 60%, #584082);
-  color: #fff;
-  box-shadow: 0 34px 90px rgba(51, 34, 80, 0.24);
-}
-
-.eyebrow.light {
-  color: #d4c6ff;
-}
-
-.contact h2 {
-  max-width: 650px;
-  font-size: clamp(36px, 4.4vw, 58px);
-}
-
-.contact-copy > p:not(.eyebrow) {
-  margin: 28px 0 12px;
-  color: #d7d0e2;
-  font-size: 16px;
-}
-
-.contact-copy ul {
-  margin: 0;
-  padding: 0;
-  display: grid;
-  gap: 7px;
-  color: #ece7f4;
-  font-size: 15px;
-  list-style: none;
-}
-
-.contact-copy li::before {
-  content: "·";
-  margin-right: 10px;
-  color: #c9b6ff;
-}
-
-.contact-links {
-  position: relative;
-  z-index: 2;
-  align-self: end;
-  display: grid;
-  gap: 9px;
-}
-
-.contact-link {
-  width: 100%;
-  min-height: 72px;
-  padding: 14px 18px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 16px;
-  border: 1px solid rgba(255, 255, 255, 0.16);
-  border-radius: 17px;
-  background: rgba(255, 255, 255, 0.08);
-  color: #fff;
-  cursor: pointer;
-  text-align: left;
-  backdrop-filter: blur(12px);
-  transition: background 180ms ease, transform 180ms ease;
-}
-
-.contact-link:hover,
-.contact-link:focus-visible {
-  background: rgba(255, 255, 255, 0.14);
-  transform: translateX(3px);
-}
-
-.contact-link span,
-.contact-link small,
-.contact-link strong {
-  display: block;
-}
-
-.contact-link small {
-  color: #c9bddb;
-  font-size: 14px;
-  font-weight: 700;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-}
-
-.contact-link strong {
-  margin-top: 2px;
-  font-size: 16px;
-}
-
-.contact-link i {
-  font-style: normal;
-  color: #d7c9ff;
-  font-size: 14px;
 }
 
 .faq {
@@ -1077,13 +951,6 @@ button {
 
 .faq-heading {
   position: static;
-}
-
-.faq-heading p {
-  margin: 0 0 8px;
-  color: var(--purple);
-  font-size: 14px;
-  font-weight: 750;
 }
 
 .faq-heading h2 {
@@ -1151,7 +1018,7 @@ button {
 .faq-answer {
   max-width: none;
   padding: 0 48px 26px 2px;
-  color: var(--muted);
+  color: var(--text-subtle);
   font-size: 16px;
   line-height: 1.85;
 }
@@ -1180,7 +1047,7 @@ button {
   min-height: 600px;
   border: 1px solid var(--line);
   border-radius: 16px;
-  background: #fff;
+  background: var(--calendar-surface);
 }
 
 .calendar-embed iframe {
@@ -1192,7 +1059,7 @@ button {
 }
 
 :root[data-theme="dark"] .calendar-embed {
-  background: #17131e;
+  background: var(--calendar-surface);
 }
 
 :root[data-theme="dark"] .calendar-embed iframe {
@@ -1408,21 +1275,6 @@ button {
     margin: 0;
   }
 
-  .contact-card {
-    grid-template-columns: 1fr;
-  }
-
-  .contact-links {
-    grid-template-columns: repeat(3, 1fr);
-  }
-
-  .contact-link {
-    align-items: flex-start;
-  }
-
-  .contact-link strong {
-    overflow-wrap: anywhere;
-  }
 }
 
 @media (max-width: 720px) {
@@ -1585,7 +1437,7 @@ button {
 
   .price-row {
     min-height: 78px;
-    grid-template-columns: minmax(0, 1fr) 100px;
+    grid-template-columns: minmax(0, 1fr) 120px;
     gap: 5px 10px;
     padding: 10px 0;
   }
@@ -1615,24 +1467,6 @@ button {
 
   .estimate-actions {
     margin: 22px 0 16px;
-  }
-
-  .contact {
-    width: 100%;
-    padding: 56px 0 0;
-  }
-
-  .contact-card {
-    padding: 54px 22px;
-    border-radius: 0;
-  }
-
-  .contact h2 {
-    font-size: 38px;
-  }
-
-  .contact-links {
-    grid-template-columns: 1fr;
   }
 
   .faq {
@@ -1716,7 +1550,13 @@ button {
   }
 }
 
-@media (max-width: 350px) {
+@media (max-width: 520px) {
+  .brand > span:last-child {
+    display: none;
+  }
+}
+
+@media (max-width: 300px) {
   .main-nav {
     display: none;
   }
@@ -1779,10 +1619,6 @@ button {
   --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
 }
 
-body {
-  font-family: "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", sans-serif;
-}
-
 h1,
 h2,
 h3,
@@ -1794,13 +1630,8 @@ h3,
 .price-groups,
 .price-group,
 .estimate-panel,
-.calendar-embed,
-.contact-link {
+.calendar-embed {
   border-radius: 16px;
-}
-
-.contact-card {
-  border-radius: 20px;
 }
 
 .price-groups {
@@ -1837,13 +1668,13 @@ h3,
 .estimate-panel {
   padding: 28px;
   border: 1px solid var(--line);
-  background: var(--lilac-soft);
+  background: var(--estimate-surface);
   box-shadow: none;
 }
 
 :root[data-theme="dark"] .estimate-panel {
   border-color: var(--line);
-  background: #282033;
+  background: var(--estimate-surface);
   box-shadow: none;
 }
 
@@ -1852,15 +1683,13 @@ h3,
 .gallery-arrow,
 .lightbox-close,
 .lightbox-nav,
-.stepper button,
-.contact-link {
+.stepper button {
   transition-timing-function: var(--ease-out);
 }
 
 .button:active,
 .theme-toggle:active,
-.stepper button:active,
-.contact-link:active {
+.stepper button:active {
   transform: scale(0.98);
 }
 
@@ -1876,7 +1705,6 @@ h3,
 @media (hover: none) {
   .button:hover,
   .theme-toggle:hover,
-  .contact-link:hover,
   .gallery-arrow:hover,
   .lightbox-nav:hover {
     transform: none;
@@ -1889,17 +1717,6 @@ h3,
 }
 
 @media (max-width: 720px) {
-  .contact {
-    width: 100%;
-    margin-inline: 0;
-    padding-right: 16px;
-    padding-left: 16px;
-  }
-
-  .contact-card {
-    border-radius: 20px;
-  }
-
   .price-group summary,
   .price-list {
     padding-inline: 18px;
