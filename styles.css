@@ -768,6 +768,21 @@ button {
   letter-spacing: 0.08em;
 }
 
+.price-group-heading {
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 4px 14px;
+}
+
+.price-group summary .price-group-heading small {
+  margin-right: 0;
+  color: var(--muted);
+  font-size: 13px;
+  font-weight: 400;
+  letter-spacing: 0;
+}
+
 .price-group summary i {
   width: 11px;
   height: 11px;
@@ -1426,7 +1441,8 @@ button {
   }
 
   .main-nav {
-    display: none;
+    gap: 18px;
+    font-size: 14px;
   }
 
   .button-small {
@@ -1697,6 +1713,12 @@ button {
 
   .lightbox-title {
     font-size: 19px;
+  }
+}
+
+@media (max-width: 350px) {
+  .main-nav {
+    display: none;
   }
 }
 
