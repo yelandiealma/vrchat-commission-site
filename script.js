@@ -31,6 +31,21 @@ systemTheme.addEventListener("change", (event) => {
   applyTheme(event.matches ? "dark" : "light");
 });
 
+// Analytics is optional: blocked or unavailable tracking must not affect the UI.
+// Send event names only, never the estimate text or customer information.
+function trackCommissionEvent(name) {
+  try {
+    if (typeof window.gtag === "function") window.gtag("event", name);
+  } catch {}
+}
+
+let estimateStarted = false;
+function trackEstimateStart(event, previousQuantity, nextQuantity) {
+  if (!event.isTrusted || estimateStarted || nextQuantity <= 0 || nextQuantity === previousQuantity) return;
+  estimateStarted = true; // Once per page load; restoring saved selections is not a start.
+  trackCommissionEvent("estimate_start");
+}
+
 const rows = [...document.querySelectorAll(".price-row")];
 const totalOutput = document.querySelector("#estimate-total");
 const countOutput = document.querySelector("#estimate-count");
@@ -87,15 +102,19 @@ rows.forEach((row) => {
   const checkbox = row.querySelector('input[type="checkbox"]');
   const stepButtons = row.querySelectorAll("[data-step]");
 
-  checkbox.addEventListener("change", () => {
+  checkbox.addEventListener("change", (event) => {
+    const previousQuantity = Number(row.dataset.quantity);
     setQuantity(row, checkbox.checked ? Math.max(1, Number(row.dataset.quantity)) : 0);
     updateEstimate();
+    trackEstimateStart(event, previousQuantity, Number(row.dataset.quantity));
   });
 
   stepButtons.forEach((button) => {
-    button.addEventListener("click", () => {
-      setQuantity(row, Number(row.dataset.quantity) + Number(button.dataset.step));
+    button.addEventListener("click", (event) => {
+      const previousQuantity = Number(row.dataset.quantity);
+      setQuantity(row, previousQuantity + Number(button.dataset.step));
       updateEstimate();
+      trackEstimateStart(event, previousQuantity, Number(row.dataset.quantity));
     });
   });
 });
@@ -393,9 +412,16 @@ function showToast(message) {
   toastTimer = setTimeout(() => toast.classList.remove("show"), 2600);
 }
 
-copyEstimateButton.addEventListener("click", async () => {
+copyEstimateButton.addEventListener("click", async (event) => {
   const copied = await copyText(buildEstimateSummary());
+  if (copied && event.isTrusted) trackCommissionEvent("estimate_copy");
   showToast(copied ? "需求摘要已複製，接著開啟 Discord 貼上即可" : "無法複製，請允許剪貼簿權限後再試一次");
+});
+
+document.querySelectorAll(".button-discord").forEach((link) => {
+  link.addEventListener("click", (event) => {
+    if (event.isTrusted) trackCommissionEvent("contact_discord");
+  });
 });
 
 document.querySelector("#year").textContent = new Date().getFullYear();
